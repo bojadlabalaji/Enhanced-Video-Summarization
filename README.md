@@ -1,5 +1,6 @@
 # Efficient Generation of Summary Videos from Long-form Content
-By leveraging Natural Language Processing (NLP) pipelines and innovative video editing methods, VISON+ generates concise and informative summaries that capture the essence of the original content.
+By utilizing advanced Natural Language Processing (NLP) pipelines and state-of-the-art video editing techniques, this project produces concise and informative summaries that effectively capture the essence of the original content through extractive summarization.
+
 
 ## Introduction
 
@@ -8,9 +9,9 @@ This project aims to generate summary videos from long YouTube videos by followi
 2. Transcribing the video into text (English only).
 3. Summarizing the transcribed text using extractive summarization.
 4. Extracting timestamps of each sentence in the summary paragraph.
-5. Merging adjacent timestamps to reduce the number of video segments.
-6. Segmenting the video using the extracted timestamps.
-7. Merging all the extracted video segments to create the final summary video.
+   1. Merging adjacent timestamps to reduce the number of video segments.
+5. Segmenting the video using the extracted timestamps.
+6. Merging all the extracted video segments to create the final summary video.
 
 ## Installation
 
@@ -35,21 +36,29 @@ To run the project, follow these steps:
 1. Import the necessary libraries and install additional packages if required:
 
     ```python
-    !pip install youtube-transcript-api
-    !pip install langdetect
-    !pip install pytube
-    !pip install spacy
-    !pip install pytextrank
+    !pip install youtube-transcript-api langdetect pytube spacy pytextrank
     !python3 -m spacy download en_core_web_lg
     ```
 
-2. Match the summary paragraph in the transcribed JSON list:
+2. Download the YouTube video:
+
+    ```python
+    from pytube import YouTube
+
+    yt = YouTube(url)
+    selected_stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').first()
+    selected_stream.download(filename='original_video.mp4')
+    ```
+
+3. Transcribe the video to text using `youtube-transcript-api` and perform extractive summarization (specific implementation details should be in your script).
+
+4. Match the summary paragraph in the transcribed JSON list:
 
     ```python
     matched_json = match_text_in_json(paragraph, json_list)
     ```
 
-3. Merge overlapping segments:
+5. Merge overlapping segments:
 
     ```python
     def merge_dicts(input_list):
@@ -73,17 +82,7 @@ To run the project, follow these steps:
     merged_matched_json = merge_dicts(matched_json)
     ```
 
-4. Download the YouTube video:
-
-    ```python
-    from pytube import YouTube
-
-    yt = YouTube(url)
-    selected_stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').first()
-    selected_stream.download(filename='original_video.mp4')
-    ```
-
-5. Segment and merge the video:
+6. Segment and merge the video:
 
     ```python
     from moviepy.editor import VideoFileClip, concatenate_videoclips
@@ -109,3 +108,7 @@ The project successfully generates concise summary videos by filtering transcrip
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Original File
+
+For detailed project information, refer to the original file located [here](https://colab.research.google.com/drive/1mIbpK_pRq4qdMdJnenmHZfHVQxJUCRJQ).
