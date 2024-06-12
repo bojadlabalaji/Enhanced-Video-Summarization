@@ -111,4 +111,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Original File
 
-For detailed project information, refer to the original file located [here](https://colab.research.google.com/drive/1mIbpK_pRq4qdMdJnenmHZfHVQxJUCRJQ).
+For detailed project information, refer to the original file located [here](https://github.com/bojadlabalaji/Enhanced-Video-Summarization/blob/main/main_notebook.ipynb).
