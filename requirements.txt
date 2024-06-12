@@ -1,0 +1,5 @@
+youtube-transcript-api
+langdetect
+pytube
+spacy
+pytextrank
